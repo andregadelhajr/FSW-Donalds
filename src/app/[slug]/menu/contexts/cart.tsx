@@ -32,7 +32,27 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const addProduct = (product: CartProduct) => {
-        return setProducts((prev) => [...prev, product]);
+        // Verificar se o produto já está no carrinho e se estiver, 
+        // aumentar a sua quantidade, se não estive o adicione 
+        const productIsAlreadyOnTheCart = products.some(
+          (prevProduct) => prevProduct.id === product.id,
+        );
+
+        if (!productIsAlreadyOnTheCart) {
+          return setProducts((prev) => [...prev, product]);
+        }
+
+        setProducts((prevProducts) => {
+            return prevProducts.map((prevProduct) => {
+                if (prevProduct.id === product.id) {
+                    return {
+                        ...prevProduct,
+                        quantity: prevProduct.quantity + product.quantity,
+                    };
+                }
+                return prevProduct;
+            });
+        });
     };
 
     return (
