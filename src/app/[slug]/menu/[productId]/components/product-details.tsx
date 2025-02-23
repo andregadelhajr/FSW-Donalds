@@ -100,7 +100,9 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                             </div>
                             <ul className="text-muted-fo list-disc px-5 text-sm text-muted-foreground">
                                 {product.ingredients.map((ingredient) => (
-                                    <li key={ingredient}>{ingredient}</li>
+                                    <li key={ingredient}>
+                                        {ingredient}
+                                    </li>
                                 ))}
                             </ul>
                         </div>
